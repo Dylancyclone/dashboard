@@ -1,0 +1,54 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(5px + 2vmin);
+  color: white;
+}
+.fontFive {
+  font-size: calc(5px + 2vmin);
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #fafafa;
+  text-align: left;
+  padding: 8px;
+}
+
+.tableContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.cell {
+  float:left;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+p {
+  white-space: pre;
+} 
