@@ -17,7 +17,7 @@ import { getDefaults, renderWidget } from './widgets/widget';
 import './react-grid-layout.css';
 import { Typography } from '@material-ui/core';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
-const originalLayouts = localStorage.getItem('layout') || '{}';
+const originalLayouts = localStorage.getItem('layout') || '[]';
 const originalData = localStorage.getItem('data') || '[]';
 
 
@@ -208,6 +208,10 @@ export default class GridController extends React.PureComponent {
 					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('clock')}>+</Avatar>
 						<p>Clock</p>
+					</div>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('weather')}>+</Avatar>
+						<p>Weather</p>
 					</div>
 				</div>
 				<ResponsiveReactGridLayout
