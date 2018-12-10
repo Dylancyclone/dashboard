@@ -98,7 +98,7 @@ export default class GridController extends React.PureComponent {
 
 				{/*<span className="text">{el.i}</span>*/}
 				<div style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
-					<div style={{display:'flex',flexBasis:'80%',boxSizing:'border-box',}}>
+					<div style={{display:'flex',width:'90%',height:'90%'}}>
 						{renderWidget(this.state.data.find(obj => obj.i == el.i).type, this.state.data.find(obj => obj.i == el.i).settings)}
 					</div>
 				</div>
@@ -212,6 +212,10 @@ export default class GridController extends React.PureComponent {
 					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('weather')}>+</Avatar>
 						<p>Weather</p>
+					</div>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('webview')}>+</Avatar>
+						<p>WebView</p>
 					</div>
 				</div>
 				<ResponsiveReactGridLayout

@@ -48,8 +48,6 @@ export default class Weather extends Component {
 					break;
 				case '09d':
 				case '09n':
-					response.weather[0].icon='rain';
-					break;
 				case '10d':
 				case '10n':
 					response.weather[0].icon='rain';
