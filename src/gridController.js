@@ -217,6 +217,10 @@ export default class GridController extends React.PureComponent {
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('webview')}>+</Avatar>
 						<p>WebView</p>
 					</div>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('gmail')}>+</Avatar>
+						<p>Gmail</p>
+					</div>
 				</div>
 				<ResponsiveReactGridLayout
 					onLayoutChange={this.onLayoutChange}

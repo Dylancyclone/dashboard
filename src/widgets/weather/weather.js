@@ -4,14 +4,15 @@ import '../../App.css';
 
 
 const getDefaults = function() {
-	return {'zip':'90001'};
+	return {'zip':'90001','apikey':'822fe3200a25f792fd1a5a34457d27a7'};
 };
 
 export default class Weather extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			'data':{}
+			'data':{},
+			error: false
 		};
 
 		this.checkWeather = this.checkWeather.bind(this);
@@ -22,54 +23,63 @@ export default class Weather extends Component {
 	}
 	
 	async checkWeather() {
-		fetch('http://api.openweathermap.org/data/2.5/weather?zip='+ this.props.settings.zip +',us&units=imperial&appid=822fe3200a25f792fd1a5a34457d27a7')
+		fetch('http://api.openweathermap.org/data/2.5/weather?zip='+ this.props.settings.zip +',us&units=imperial&appid='+ this.props.settings.apikey)
 			.then((response) => response.json())
 			.then((response) => {
 				//alert(JSON.stringify(response))
 				//this.fetchItems();
 				//console.log(response);
-				switch (response.weather[0].icon)
+				if (response.weather !== undefined)
 				{
-				case '01d':
-				case '01n':
-					response.weather[0].icon='clear';
-					break;
-				case '02d':
-				case '02n':
-					response.weather[0].icon='partlycloudy';
-					break;
-				case '03d':
-				case '03n':
-					response.weather[0].icon='mostlycloudy';
-					break;
-				case '04d':
-				case '04n':
-					response.weather[0].icon='cloudy';
-					break;
-				case '09d':
-				case '09n':
-				case '10d':
-				case '10n':
-					response.weather[0].icon='rain';
-					break;
-				case '11d':
-				case '11n':
-					response.weather[0].icon='tstorms';
-					break;
-				case '13d':
-				case '13n':
-					response.weather[0].icon='snow';
-					break;
-				case '50d':
-				case '50n':
-					response.weather[0].icon='fog';
-					break;
+					switch (response.weather[0].icon)
+					{
+					case '01d':
+					case '01n':
+						response.weather[0].icon='clear';
+						break;
+					case '02d':
+					case '02n':
+						response.weather[0].icon='partlycloudy';
+						break;
+					case '03d':
+					case '03n':
+						response.weather[0].icon='mostlycloudy';
+						break;
+					case '04d':
+					case '04n':
+						response.weather[0].icon='cloudy';
+						break;
+					case '09d':
+					case '09n':
+					case '10d':
+					case '10n':
+						response.weather[0].icon='rain';
+						break;
+					case '11d':
+					case '11n':
+						response.weather[0].icon='tstorms';
+						break;
+					case '13d':
+					case '13n':
+						response.weather[0].icon='snow';
+						break;
+					case '50d':
+					case '50n':
+						response.weather[0].icon='fog';
+						break;
+					}
+					//data = JSON.parse(data);
+					this.setState({
+						data: response
+					});
 				}
-				//data = JSON.parse(data);
-				this.setState({
-					data: response
-				});
-				//setTimeout(this.checkWeather, 500);
+				else
+				{
+					this.setState({
+						error: true
+					});
+				}
+				setTimeout(this.checkWeather, 5*60*1000);
 			});
 	}
 
@@ -86,9 +96,8 @@ export default class Weather extends Component {
 				}
 
 				<p>
-					{/*this.props.settings.zip*/}
-					{/*this.props.settings.zip !== '' && '\n'*/}
 					{this.state.data.weather !== undefined && this.state.data.main.temp + '° F'}
+					{this.state.error === true && 'API ERROR'}
 				</p>
 			</div>
 		);
