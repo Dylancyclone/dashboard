@@ -79,7 +79,7 @@ export default class Weather extends Component {
 						error: true
 					});
 				}
-				setTimeout(this.checkWeather, 5*60*1000);
+				setTimeout(() => this.checkWeather, 5*60*1000);
 			});
 	}
 

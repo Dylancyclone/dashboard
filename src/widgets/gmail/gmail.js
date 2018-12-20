@@ -24,31 +24,14 @@ export default class Gmail extends Component {
 	componentDidMount()
 	{		
 		gapi.load('client:auth2', this.initClient);
-		
-
 	}
+
 	initClient() {
-		gapi.client.init({
-			apiKey: 'AIzaSyBPa0-hYuLzezB1a6yM9zRh9hkDuoDue98',
-			clientId: '1082567242324-06e7cf3da16l32vf9qe9dfk7e7nlen9m.apps.googleusercontent.com',
-			discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'],
-			scope: 'https://www.googleapis.com/auth/gmail.readonly'
-		}).then(() => {
-			// Listen for sign-in state changes.
-			gapi.auth2.getAuthInstance().isSignedIn.listen(this.checkSignedIn);
-
-			// Handle the initial sign-in state.
-			// updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-			// authorizeButton.onclick = handleAuthClick;
-			// signoutButton.onclick = handleSignoutClick;
-			//gapi.auth2.getAuthInstance().signIn();
-			this.checkSignedIn(gapi.auth2.getAuthInstance().isSignedIn.get());
-		}, function(error) {
-			console.log(JSON.stringify(error, null, 2));
-		});
+		gapi.auth2.getAuthInstance().isSignedIn.listen(this.checkSignedIn);
+		this.checkSignedIn(gapi.auth2.getAuthInstance().isSignedIn.get());
 	}
 
-	checkSignedIn(isSignedIn)
+	checkSignedIn(isSignedIn, once = false)
 	{
 		if (isSignedIn) {
 			this.setState({
@@ -60,6 +43,7 @@ export default class Gmail extends Component {
 				signedIn:false
 			});
 		}
+		if (!once) {setTimeout(() => this.checkSignedIn(gapi.auth2.getAuthInstance().isSignedIn.get()), 5*60*1000);}
 	}
 
 	clickSignIn()

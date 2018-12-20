@@ -20,6 +20,8 @@ const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = localStorage.getItem('layout') || '[]';
 const originalData = localStorage.getItem('data') || '[]';
 
+const gapi = window.gapi;
+
 
 function Transition(props) {
 	return <Slide direction="up" {...props} />;
@@ -71,6 +73,23 @@ export default class GridController extends React.PureComponent {
 		if (e.key === 'Enter') {
 			this.saveSettings();
 		}
+	}
+	
+
+	componentWillMount()
+	{		
+		gapi.load('client:auth2', this.initClient);
+		
+
+	}
+	initClient() {
+		gapi.client.init({
+			apiKey: 'AIzaSyBPa0-hYuLzezB1a6yM9zRh9hkDuoDue98',
+			clientId: '1082567242324-06e7cf3da16l32vf9qe9dfk7e7nlen9m.apps.googleusercontent.com',
+			discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest','https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
+			scope: 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/calendar.readonly'
+		});
+		//Init Google API client
 	}
 
 	createElement(el) {
@@ -220,6 +239,10 @@ export default class GridController extends React.PureComponent {
 					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('gmail')}>+</Avatar>
 						<p>Gmail</p>
+					</div>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('calendar')}>+</Avatar>
+						<p>Calendar</p>
 					</div>
 				</div>
 				<ResponsiveReactGridLayout

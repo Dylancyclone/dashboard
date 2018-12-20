@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Clock,  * as clock from './clock/clock.js';
-import Weather,  * as weather from './weather/weather.js';
-import WebView,  * as webview from './webview/webview.js';
-import Gmail,  * as gmail from './gmail/gmail.js';
+import Clock, * as clock from './clock/clock.js';
+import Weather, * as weather from './weather/weather.js';
+import WebView, * as webview from './webview/webview.js';
+import Gmail, * as gmail from './gmail/gmail.js';
+import Calendar, * as calendar from './calendar/calendar.js';
 
 const getDefaults = function(type) {
 	if (type == 'clock')
@@ -20,6 +21,10 @@ const getDefaults = function(type) {
 	if (type == 'gmail')
 	{
 		return gmail.getDefaults();
+	}
+	if (type == 'calendar')
+	{
+		return calendar.getDefaults();
 	}
 };
 
@@ -39,6 +44,10 @@ const renderWidget = function(type, settings) {
 	if (type == 'gmail')
 	{
 		return (<Gmail settings={settings} />);
+	}
+	if (type == 'calendar')
+	{
+		return (<Calendar settings={settings} />);
 	}
 };
 
