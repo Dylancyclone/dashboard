@@ -16,6 +16,9 @@ import { getDefaults, renderWidget } from './widgets/widget';
 
 import './react-grid-layout.css';
 import { Typography } from '@material-ui/core';
+
+import {config} from './config';
+
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = localStorage.getItem('layout') || '[]';
 const originalData = localStorage.getItem('data') || '[]';
@@ -84,7 +87,7 @@ export default class GridController extends React.PureComponent {
 	}
 	initClient() {
 		gapi.client.init({
-			apiKey: 'AIzaSyBPa0-hYuLzezB1a6yM9zRh9hkDuoDue98',
+			apiKey: config.googleApiKey,
 			clientId: '1082567242324-06e7cf3da16l32vf9qe9dfk7e7nlen9m.apps.googleusercontent.com',
 			discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest','https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
 			scope: 'https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/calendar.readonly'
