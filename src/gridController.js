@@ -35,6 +35,7 @@ export default class GridController extends React.PureComponent {
 		className: 'layout',
 		cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
 		rowHeight: 100,
+		verticalCompact: false,
 	};
 
 	constructor(props) {
@@ -136,7 +137,6 @@ export default class GridController extends React.PureComponent {
 	}
 
 	onAddItem() {
-		/*eslint no-console: 0*/
 		this.setState({
 			// Add a new item. It must have a unique key!
 			items: this.state.items.concat({
@@ -250,6 +250,10 @@ export default class GridController extends React.PureComponent {
 					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('notepad')}>+</Avatar>
 						<p>Notepad</p>
+					</div>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('countdown')}>+</Avatar>
+						<p>Countdown</p>
 					</div>
 				</div>
 				<ResponsiveReactGridLayout

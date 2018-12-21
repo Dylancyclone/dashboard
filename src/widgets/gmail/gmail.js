@@ -43,7 +43,7 @@ export default class Gmail extends Component {
 				signedIn:false
 			});
 		}
-		if (!once) {setTimeout(() => this.checkSignedIn(gapi.auth2.getAuthInstance().isSignedIn.get()), 5*60*1000);}
+		if (!once) {setTimeout(() => this.checkSignedIn(gapi.auth2.getAuthInstance().isSignedIn.get()), 1*60*1000);}
 	}
 
 	clickSignIn()
@@ -52,16 +52,24 @@ export default class Gmail extends Component {
 	}
 
 	getUnreadMessages() {
-		var request = gapi.client.gmail.users.labels.get({
-			'userId': 'me',
-			'id': 'INBOX'
-		});
-		request.execute((response) => {
-			//console.log(response.messagesUnread);
-			this.setState({
-				unreadMessages:response.messagesUnread
+		if (gapi.client.gmail !== undefined)
+		{
+			var request = gapi.client.gmail.users.labels.get({
+				'userId': 'me',
+				'id': 'INBOX'
 			});
-		});
+			request.execute((response) => {
+				//console.log(response.messagesUnread);
+				this.setState({
+					unreadMessages:response.messagesUnread
+				});
+			});
+		}
+		else
+		{
+			console.log('Still waiting for the Google API to load...');
+			setTimeout(() => this.getUnreadMessages(), 1000);
+		}
 	}
 
 	render() {

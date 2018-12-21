@@ -5,6 +5,7 @@ import WebView, * as webview from './webview/webview.js';
 import Gmail, * as gmail from './gmail/gmail.js';
 import Calendar, * as calendar from './calendar/calendar.js';
 import Notepad, * as notepad from './notepad/notepad.js';
+import Countdown, * as countdown from './countdown/countdown.js';
 
 const getDefaults = function(type) {
 	if (type == 'clock')
@@ -30,6 +31,10 @@ const getDefaults = function(type) {
 	if (type == 'notepad')
 	{
 		return notepad.getDefaults();
+	}
+	if (type == 'countdown')
+	{
+		return countdown.getDefaults();
 	}
 };
 
@@ -57,6 +62,10 @@ const renderWidget = function(type, settings) {
 	if (type == 'notepad')
 	{
 		return (<Notepad settings={settings} />);
+	}
+	if (type == 'countdown')
+	{
+		return (<Countdown settings={settings} />);
 	}
 };
 

@@ -8,7 +8,7 @@ A work-in-progress custom dashboard for day-to-day operations. This project is n
 
 - [ ] To do List
 - [x] Clock
-- [ ] Countdown Timer
+- [x] Countdown Timer
 - [x] Weather
 - [x] Calendar
 - [x] Gmail
