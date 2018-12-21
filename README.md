@@ -19,7 +19,7 @@ A work-in-progress custom dashboard for day-to-day operations. This project is n
 - [x] Webview
 - [ ] RSS
 - [ ] Steam
-- [ ] Notepad
+- [x] Notepad
 
 #### Other
 

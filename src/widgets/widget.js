@@ -4,6 +4,7 @@ import Weather, * as weather from './weather/weather.js';
 import WebView, * as webview from './webview/webview.js';
 import Gmail, * as gmail from './gmail/gmail.js';
 import Calendar, * as calendar from './calendar/calendar.js';
+import Notepad, * as notepad from './notepad/notepad.js';
 
 const getDefaults = function(type) {
 	if (type == 'clock')
@@ -25,6 +26,10 @@ const getDefaults = function(type) {
 	if (type == 'calendar')
 	{
 		return calendar.getDefaults();
+	}
+	if (type == 'notepad')
+	{
+		return notepad.getDefaults();
 	}
 };
 
@@ -48,6 +53,10 @@ const renderWidget = function(type, settings) {
 	if (type == 'calendar')
 	{
 		return (<Calendar settings={settings} />);
+	}
+	if (type == 'notepad')
+	{
+		return (<Notepad settings={settings} />);
 	}
 };
 
