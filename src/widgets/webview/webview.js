@@ -4,7 +4,7 @@ import '../../App.css';
 
 
 const getDefaults = function() {
-	return {'url':'https://github.com/Dylancyclone/dashboard'};
+	return {'url':'https://bing.com/'};
 };
 
 export default class WebView extends Component {

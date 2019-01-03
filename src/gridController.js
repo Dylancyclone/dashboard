@@ -35,7 +35,7 @@ export default class GridController extends React.PureComponent {
 		className: 'layout',
 		cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
 		rowHeight: 100,
-		verticalCompact: false,
+		compactType: null,
 	};
 
 	constructor(props) {
@@ -121,8 +121,8 @@ export default class GridController extends React.PureComponent {
 
 				{/*<span className="text">{el.i}</span>*/}
 				<div style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
-					<div style={{display:'flex',width:'90%',height:'90%'}}>
-						{renderWidget(this.state.data.find(obj => obj.i == el.i).type, this.state.data.find(obj => obj.i == el.i).settings)}
+					<div style={{display:'flex',width:'90%',height:'90%',overflow:'hidden'}}>
+						{renderWidget(this.state.data.find(obj => obj.i == el.i))}
 					</div>
 				</div>
 				<span
@@ -223,35 +223,35 @@ export default class GridController extends React.PureComponent {
 		return (
 			<div>
 				<div style={{padding:20,display:'flex',flexDirection:'row'}}>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('blank')}>+</Avatar>
 						<p>Blank</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('clock')}>+</Avatar>
 						<p>Clock</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('weather')}>+</Avatar>
 						<p>Weather</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('webview')}>+</Avatar>
 						<p>WebView</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('gmail')}>+</Avatar>
 						<p>Gmail</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('calendar')}>+</Avatar>
 						<p>Calendar</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('notepad')}>+</Avatar>
 						<p>Notepad</p>
 					</div>
-					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa'}}>
+					<div style={{padding:10,display:'flex',flexDirection:'column',textAlign:'center', color: '#fafafa',alignItems:'center'}}>
 						<Avatar style={{backgroundColor:'#FF5722',width:60,height:60}} onClick={() => this.clickAdd('countdown')}>+</Avatar>
 						<p>Countdown</p>
 					</div>
