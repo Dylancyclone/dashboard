@@ -7,67 +7,75 @@ import Calendar, * as calendar from './calendar/calendar.js';
 import Notepad, * as notepad from './notepad/notepad.js';
 import Countdown, * as countdown from './countdown/countdown.js';
 
-const getDefaults = function(type) {
-	if (type == 'clock')
+const getDefaultSettings = function(type) {
+	switch (type)
 	{
-		return clock.getDefaults();
+	case 'clock':
+		return clock.getDefaultSettings();
+	case 'weather':
+		return weather.getDefaultSettings();
+	case 'webview':
+		return webview.getDefaultSettings();
+	case 'gmail':
+		return gmail.getDefaultSettings();
+	case 'calendar':
+		return calendar.getDefaultSettings();
+	case 'notepad':
+		return notepad.getDefaultSettings();
+	case 'countdown':
+		return countdown.getDefaultSettings();
 	}
-	if (type == 'weather')
+};
+const getDefaultData = function(type) {
+	switch (type)
 	{
-		return weather.getDefaults();
-	}
-	if (type == 'webview')
-	{
-		return webview.getDefaults();
-	}
-	if (type == 'gmail')
-	{
-		return gmail.getDefaults();
-	}
-	if (type == 'calendar')
-	{
-		return calendar.getDefaults();
-	}
-	if (type == 'notepad')
-	{
-		return notepad.getDefaults();
-	}
-	if (type == 'countdown')
-	{
-		return countdown.getDefaults();
+	case 'clock':
+		return clock.getDefaultData();
+	case 'weather':
+		return weather.getDefaultData();
+	case 'webview':
+		return webview.getDefaultData();
+	case 'gmail':
+		return gmail.getDefaultData();
+	case 'calendar':
+		return calendar.getDefaultData();
+	case 'notepad':
+		return notepad.getDefaultData();
+	case 'countdown':
+		return countdown.getDefaultData();
 	}
 };
 
-const renderWidget = function(type, settings) {
-	if (type == 'clock')
+const renderWidget = function(item, callback) {
+	if (item.type == 'clock')
 	{
-		return (<Clock settings={settings} />);
+		return (<Clock settings={item.settings} />);
 	}
-	if (type == 'weather')
+	if (item.type == 'weather')
 	{
-		return (<Weather settings={settings} />);
+		return (<Weather settings={item.settings} />);
 	}
-	if (type == 'webview')
+	if (item.type == 'webview')
 	{
-		return (<WebView settings={settings} />);
+		return (<WebView settings={item.settings} />);
 	}
-	if (type == 'gmail')
+	if (item.type == 'gmail')
 	{
-		return (<Gmail settings={settings} />);
+		return (<Gmail settings={item.settings} />);
 	}
-	if (type == 'calendar')
+	if (item.type == 'calendar')
 	{
-		return (<Calendar settings={settings} />);
+		return (<Calendar settings={item.settings} />);
 	}
-	if (type == 'notepad')
+	if (item.type == 'notepad')
 	{
-		return (<Notepad settings={settings} />);
+		return (<Notepad settings={item.settings} data={item.data} callback={callback}/>);
 	}
-	if (type == 'countdown')
+	if (item.type == 'countdown')
 	{
-		return (<Countdown settings={settings} />);
+		return (<Countdown settings={item.settings} />);
 	}
 };
 
 
-export { getDefaults, renderWidget };
+export { getDefaultSettings, getDefaultData, renderWidget };

@@ -13,9 +13,12 @@ let formats = {
 };
 let components = {
 	toolbar: CustomToolbar
-}
+};
 
-const getDefaults = function() {
+const getDefaultSettings = function() {
+	return {};
+};
+const getDefaultData = function() {
 	return {};
 };
 
@@ -175,4 +178,4 @@ export default class Calendar extends Component {
 	}
 }
 
-export { getDefaults };
+export { getDefaultSettings, getDefaultData };

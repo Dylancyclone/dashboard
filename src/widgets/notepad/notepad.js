@@ -14,9 +14,9 @@ export default class Notepad extends Component {
 	render() {
 		return (
 			<div style={{display:'flex',width:'100%',height:'100%'}}>
-				<p style={{display:'flex',width:'100%',height:'100%',whiteSpace:'pre-wrap'}}>
+				<textarea style={{display:'flex',width:'100%',height:'100%',whiteSpace:'pre-wrap'}} onChange={this.props.callback('text')} >
 					{this.props.settings.text}
-				</p>
+				</textarea>
 			</div>
 		);
 	}

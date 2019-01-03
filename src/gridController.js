@@ -12,7 +12,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import TextField from '@material-ui/core/TextField';
 
-import { getDefaults, renderWidget } from './widgets/widget';
+import { getDefaultSettings, getDefaultData, renderWidget } from './widgets/widget';
 
 import './react-grid-layout.css';
 import { Typography } from '@material-ui/core';
@@ -35,7 +35,7 @@ export default class GridController extends React.PureComponent {
 		className: 'layout',
 		cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
 		rowHeight: 100,
-		verticalCompact: false,
+		compactType: null,
 	};
 
 	constructor(props) {
@@ -72,6 +72,30 @@ export default class GridController extends React.PureComponent {
 				}
 			}
 		});
+	}
+	handleDataValueChange = (item) => (key) => (event) => {
+		console.log(item);
+		console.log(key);
+		console.log(event);
+		var newData = this.state.data;
+		item = newData.findIndex(obj => obj.i == item);
+		console.log(item);
+		newData[item].data[key] = event.target.value;
+		this.setState({
+			data: newData,
+		});
+		localStorage.setItem('data', JSON.stringify(newData));
+		// this.setState({
+		// 	data: {
+		// 		...this.state.data,
+		// 		[item]: {
+		// 			data: {
+		// 				...this.state.inspectItem.data,
+		// 				[key]: event.target.value
+		// 			}
+		// 		}
+		// 	}
+		// });
 	}
 	handleKeyPress = (e) => {
 		if (e.key === 'Enter' && !e.shiftKey) {
@@ -121,8 +145,8 @@ export default class GridController extends React.PureComponent {
 
 				{/*<span className="text">{el.i}</span>*/}
 				<div style={{display:'flex',width:'100%',height:'100%',alignItems:'center',justifyContent:'center',overflow:'hidden'}}>
-					<div style={{display:'flex',width:'90%',height:'90%'}}>
-						{renderWidget(this.state.data.find(obj => obj.i == el.i).type, this.state.data.find(obj => obj.i == el.i).settings)}
+					<div style={{display:'flex',width:'90%',height:'90%',overflow:'hidden'}} onMouseDown={(e) => e.stopPropagation()}>
+						{renderWidget(this.state.data.find(obj => obj.i == el.i), this.handleDataValueChange(el.i))}
 					</div>
 				</div>
 				<span
@@ -185,7 +209,8 @@ export default class GridController extends React.PureComponent {
 	
 	async clickAdd(type) {
 		var uudid = uuidv4(); //Generate UUIDv4
-		var defaultValues = getDefaults(type);
+		var defaultSettings = getDefaultSettings(type);
+		var defaultData = getDefaultData(type);
 		//alert(defaultValues)
 		await this.setState({
 			// Add a new item. It must have a unique key!
@@ -199,7 +224,7 @@ export default class GridController extends React.PureComponent {
 			data: this.state.data.concat({
 				i: uudid,
 				type:type,
-				settings:defaultValues
+				settings:defaultSettings
 			})
 		});
 		//alert(this.state.data);
