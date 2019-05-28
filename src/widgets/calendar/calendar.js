@@ -4,6 +4,7 @@ import './react-big-calendar.css';
 import '../../App.css';
 import BigCalendar from 'react-big-calendar';
 import CustomToolbar from './customToolbar';
+import { RRule, RRuleSet, rrulestr } from 'rrule';
 import moment from 'moment';
 const gapi = window.gapi;
 
@@ -103,6 +104,57 @@ export default class Calendar extends Component {
 												'start': new Date(event.start.dateTime),
 												'end': new Date(event.end.dateTime)
 											});
+											if (event.recurrence !== undefined)
+											{
+												console.log(event.recurrence[0])
+												var startDate = moment(event.start.dateTime).format('YYYYMMDD');
+												const rule = RRule.fromString('DTSTART:'+startDate+';'+event.recurrence[0]+';COUNT=50');
+												//console.log(rule.all());
+												// rule.all().map(date => {
+												// 	build.push({
+												// 		'title': event.summary,
+												// 		'color': calendar.backgroundColor,
+												// 		'start': date,
+												// 		'end': date
+												// 	});
+												// })
+												// if (event.recurrence[0].match(/FREQ=([A-Z]+);/)[1] == 'WEEKLY')
+												// {
+												// 	var currStartDate = new Date(event.start.dateTime);
+												// 	var currEndDate = new Date(event.end.dateTime);
+												// 	console.log(event.recurrence);
+												// 	console.log(moment(event.start.dateTime).weekday());
+												// 	if (event.recurrence[0].match(/UNTIL=([0-9]+)/))
+												// 	{
+												// 		var until = new Date(event.recurrence[0].match(/UNTIL=([0-9]+)/)[1].slice(0,4),event.recurrence[0].match(/UNTIL=([0-9]+)/)[1].slice(4,6),event.recurrence[0].match(/UNTIL=([0-9]+)/)[1].slice(7,10));
+												// 		console.log(until);
+												// 	}
+												// 	else
+												// 	{
+												// 		var until = new Date(today.getFullYear()+1, today.getMonth(), today.getDate());
+												// 	}
+												// 	if (event.recurrence[0].match(/BYDAY=([A-Z,]+)/))
+												// 	{
+												// 		console.log(event.recurrence[0].match(/BYDAY=([A-Z,]+)/)[1].split(','));
+												// 	}
+												// 	else
+												// 	{
+												// 		console.log('...');
+												// 	}
+												// 	while (currStartDate < until)
+												// 	{
+												// 		currStartDate.setDate(currStartDate.getDate() + 7);
+												// 		console.log(currStartDate);
+												// 		currEndDate.setDate(currEndDate.getDate() + 7); 
+												// 		build.push({
+												// 			'title': event.summary,
+												// 			'color': calendar.backgroundColor,
+												// 			'start': currStartDate,
+												// 			'end': currEndDate
+												// 		});
+												// 	}
+												// }
+											}
 										}
 										else // If the event is all day
 										{
@@ -117,10 +169,12 @@ export default class Calendar extends Component {
 									}
 								});
 							}
+							//console.log(build);
 							
 							this.setState({
 								events: this.state.events.concat(build)
 							});
+							// console.log(this.state.events.length)
 						});
 					}
 					
@@ -168,6 +222,7 @@ export default class Calendar extends Component {
 							})}
 						/>
 						<img className="logout-button" src="https://cdn1.iconfinder.com/data/icons/small-black-v5/512/account_arrow_exit_log_logout_out_signout-512.png" alt="" onClick={() => gapi.auth2.getAuthInstance().signOut()}/>
+						<img className="test-button" src="https://cdn1.iconfinder.com/data/icons/small-black-v5/512/account_arrow_exit_log_logout_out_signout-512.png" alt="" onClick={() => this.getCalendarEvents()}/>
 					</div>
 				}
 			</div>
